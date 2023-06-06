@@ -1,0 +1,7 @@
+# .gitignore
+
+```
+.env
+/*/node_modules/*/
+/*/elastic-search-kibana-docker-compose.yaml
+```
