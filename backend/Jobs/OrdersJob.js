@@ -31,7 +31,7 @@ const getClientAccessToken = async () => {
   return data.access_token;
 };
 
-async function searchOrdersByEmail(accessToken, shopId, createdBy) {
+async function searchOrders(accessToken, shopId, currency) {
   const JobExecutions = await axios.post(`${process.env.COMMERCE_CLOUD_HOST}/s/${shopId}/dw/shop/v23_2/order_search`,
     {
       'query': {
@@ -39,7 +39,7 @@ async function searchOrdersByEmail(accessToken, shopId, createdBy) {
           'fields': [
             'created_by','currency_code'
           ],
-          'search_phrase': createdBy
+          'search_phrase': currency
         }
       },
       'select': '(**)',
@@ -64,9 +64,9 @@ async function executeJob() {
     const accessToken = await getClientAccessToken();
     const shopId = 'RefArch';
     const email = 'example@example.com';
-    const createdBy = 'USD';
+    const currency = 'USD';
 
-    const searchResults = await searchOrdersByEmail(accessToken, shopId, createdBy);
+    const searchResults = await searchOrders(accessToken, shopId, currency);
     console.dir(searchResults, { depth: null });
 
     // Process the search results here
