@@ -74,7 +74,7 @@ async function executeJob() {
     
     const kafkaPayload = {
       topic: 'orders-topic', // Update with your desired Kafka topic name
-      messages: searchResults,
+      messages: JSON.stringify(searchResults),
     };
     kafkaProducer.send([kafkaPayload], (error, data) => {
       if (error) {

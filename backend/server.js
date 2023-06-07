@@ -9,7 +9,9 @@ app.use(cors());
 // Add Elasticsearch configuration and client initialization code
 const { Client } = require('@elastic/elasticsearch');
 
-const client = new Client({ node: process.env.ELASTICSEARCH_HOST });
+const elasticsearchHost = process.env.ELASTICSEARCH_HOST || 'http://localhost:9200';
+
+const client = new Client({ node: elasticsearchHost });
 
 // Test the Elasticsearch connection
 client.ping((err) => {
